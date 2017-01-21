@@ -15,7 +15,7 @@ app.use(function(req, res, next) {
 
 app.get('/', function(req, res) {
     var id = req.param('id');
-    console.log('rawBody: ' + req.rawBody); // JSON rawBody
+    console.log('rawHeaders: ' + req.rawHeaders); // JSON rawHeaders
     res.send(JSON.stringify(req.rawHeaders)); // JSON response
 });
 

@@ -13,14 +13,23 @@ app.use(function(req, res, next) {
     });
 });
 
-app.get('/', function(req, res) {
+app.get('*', function(req, res) {
     var id = req.param('id');
 
+    var myHeader, headerArray, key;
+    myHeader = JSON.parse(JSON.stringify(req.headers));
+    headerArray = [];
+    for (key in myHeader) {
+        headerArray.push(key);         // Push the key on the array
+        headerArray.push(myHeader[key]); // Push the key's value on the array
+    }
+
     var jsonObj = {
-        "Method": req.method,
-        "Path": req.path,
-        "Port": req.get('host').split(':')[1],
-        "Headers": req.headers
+        "method": req.method,
+        "path": req.path,
+        "host": req.host,
+        "port": req.get('host').split(':')[1],
+        "header": headerArray
     }
     console.log("\n");
     console.log(jsonObj);
